@@ -116,7 +116,7 @@ class TwitterBootstrapFormFor::FormBuilder < ActionView::Helpers::FormBuilder
           template.concat template.content_tag(:span, label)
         }
         if toggle == :check_box
-          template.concat template.content_tag(:div, :class => "clearfix error") {
+          template.concat template.content_tag(:div, :class => "clearfix has-error") {
             template.concat error_span(attribute)
           } if errors_on?(attribute)
         end
@@ -152,7 +152,7 @@ class TwitterBootstrapFormFor::FormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def errors_for(attribute)
-    self.object.errors[attribute].try(:join, ', ')
+    self.object.errors[attribute].try(:join, ', or ')
   end
 
   private
@@ -176,7 +176,7 @@ class TwitterBootstrapFormFor::FormBuilder < ActionView::Helpers::FormBuilder
   #
   def _wrapper_classes(attribute, *classes)
     classes.compact.tap do |klasses|
-      klasses.push 'error' if self.errors_on?(attribute)
+      klasses.push 'has-error' if self.errors_on?(attribute)
     end.join(' ')
   end
 
